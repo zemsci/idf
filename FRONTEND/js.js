@@ -110,12 +110,45 @@ MainAppModule.controller('LEFT_MENU', ['$scope', '$http', '$compile', '$template
         }
         $scope.GetCompaniesList = function () {
             url = "../BACKEND/index.php/Record/getList/companies";
-            $http.post(url, $scope.new_company).
-                    then(function (response) {
-                        $scope.companies = response.data.data;
-                    }, function (response) {
+//            $http.post(url, $scope.new_company).
+//                    then(function (response) {
+//                        $scope.companies = response.data.data;
+//
+//                    }, function (response) {
+//
+            setTimeout(function () {
+                var table=$('#tb_company').DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    "lengthMenu": [[5, 10, 25, 50, -1], [10, 25, 50, "All"]],
+                    ajax: {
+                        url: url,
+                        dataSrc: 'data'
+                    },
+                    columns: [
+                        {data: "NAME"},
+                        {data: "BRANCH"},
+                        {data: "INDUSTRY", searchable: false},
+                    ],
+                    "columnDefs": [
+                        {
+                            // The `data` parameter refers to the data for the cell (defined by the
+                            // `data` option, which defaults to the column being worked with, in
+                            // this case `data: 0`.
+                            "render": function (data, type, row) {
+                                return "<a href='#' ng-click='SetSelectedCompany()'>" + data + "</a>";
+                            },
+                            "targets": 0
+                        },
+                    ]
+                });
+                $('#tb_company tbody').on('click', 'a', function () {
+                    $(this).parent().parent().toggleClass('bg-gray');
+                    var com=table.rows('.bg-gray').data()[0];
+                    $scope.SetSelectedCompany(com);
+                });
+            }, 50);
 
-                    });
         }
         $scope.GetEmailList = function (NAME) {
             url = "../BACKEND/index.php/Record/getList/email";
@@ -247,7 +280,7 @@ MainAppModule.controller('LEFT_MENU', ['$scope', '$http', '$compile', '$template
                 CREATE_TIME: "",
                 MODIFY_DATE: "",
                 MODIFY_TIME: "",
-                LOGO_URL:"",
+                LOGO_URL: "",
             };
             return obj;
         }

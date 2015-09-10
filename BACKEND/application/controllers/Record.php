@@ -45,8 +45,26 @@ class Record extends CI_Controller {
     }
 
     public function getlist($table) {
-    
-        $_REQUEST = json_decode(file_get_contents('php://input'), true);
+        if (isset($_REQUEST['columns'])) {
+            $datatable_columns = $_REQUEST['columns'];
+        }
+        if (isset($_REQUEST['order'])) {
+            $datatable_order = $_REQUEST['order'];
+        }
+        if (isset($_REQUEST['start'])) {
+            $datatable_start = $_REQUEST['start'];
+        }
+        if (isset($_REQUEST['length'])) {
+            $datatable_length = $_REQUEST['length'];
+        }
+        if (isset($_REQUEST['search'])) {
+            $datatable_search = $_REQUEST['search'];
+        }
+        if (file_get_contents('php://input') != "") {
+            $_REQUEST = json_decode(file_get_contents('php://input'), true);
+        } else {
+            unset($_REQUEST);
+        }
         $count_all = $this->db->count_all_results($table);
 
         $this->db->start_cache();
@@ -56,12 +74,24 @@ class Record extends CI_Controller {
                 $this->db->where($value['field'], $value['value']);
             }
         }
+
+
         if (isset($_REQUEST["search"]) && $_REQUEST["search"] != "") {
             $search = $_REQUEST["search"];
             foreach ($search as $value) {
                 $this->db->or_like($value['field'], $value['value']);
             }
         }
+
+        if (isset($datatable_search)) {
+            for ($i = 0; $i < count($datatable_columns); $i++) {
+                if ($datatable_columns[$i]["searchable"] == "true") {
+                    $this->db->or_like($datatable_columns[$i]["data"], $datatable_search["value"]);
+                }
+            }
+        }
+
+
         if (isset($_REQUEST["in"]) && $_REQUEST["in"] != "") {
             $in = json_decode($_REQUEST["in"]);
             $this->db->where_in($in['field'], $In['data']);
@@ -80,17 +110,28 @@ class Record extends CI_Controller {
                 $this->db->order_by($value['field'], $value['type']);
             }
         }
+        if (isset($datatable_order)) {
+            for ($i = 0; $i < count($datatable_order); $i++) {
+                if ($datatable_columns[$datatable_order[$i]["column"]]["orderable"] == "true") {
+                    $this->db->order_by($datatable_columns[$datatable_order[$i]["column"]]["data"], $datatable_order[$i]["dir"]);
+                }
+            }
+        }
+
 
         $this->db->stop_cache();
         $count = $this->db->count_all_results($table);
+        if (isset($datatable_length)) {
+            $this->db->limit($datatable_length, $datatable_start);
+        }
         $query = $this->db->get();
         $data = $query->result();
-        
+
         $result = array(
-            "count_all" => $count_all,
-            "count" => $count,
+            "recordsTotal" => $count_all,
+            "recordsFiltered" => $count,
             "data" => $data,
-            "command"=>$this->db->get_compiled_select()
+            "command" => $this->db->get_compiled_select(),
         );
         echo json_encode($result);
     }
