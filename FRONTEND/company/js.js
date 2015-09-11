@@ -1,5 +1,5 @@
 var MainAppModule = angular.module('IDF_CRM', []);
-MainAppModule.controller('LEFT_MENU', ['$scope', '$http', '$compile', '$templateCache',
+MainAppModule.controller('COMPANY', ['$scope', '$http', '$compile', '$templateCache',
     function ($scope, $http, $compile, $templateCache) {
         $scope.MainContain = "";
         $scope.table = {};
