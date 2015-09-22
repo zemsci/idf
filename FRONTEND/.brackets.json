@@ -1,0 +1,7 @@
+{
+    "jscodehints.detectedExclusions": [
+        "C:/wamp/www/NEW_IDF_CRM/FRONTEND/plugins/ckeditor/lang/bg.js",
+        "C:/wamp/www/NEW_IDF_CRM/FRONTEND/plugins/ckeditor/lang/fa.js",
+        "C:/wamp/www/NEW_IDF_CRM/FRONTEND/plugins/ckeditor/lang/fo.js"
+    ]
+}

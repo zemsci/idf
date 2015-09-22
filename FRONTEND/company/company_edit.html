@@ -55,7 +55,7 @@
                             <h3 class="box-title">General</h3>
                             <div class="box-tools">
                                 <div class="input-group" style="width: 0px;">                                 
-                                    <button type="button"  ng-click="CompanyBack()" class="btn btn-danger"><i class="fa fa-mail-reply"></i></button>
+                                    <button  ng-show="Mode=='EDIT'" type="button"  ng-click="ShowCompanyInfo(new_company.ID)" class="btn btn-info"><i class="fa fa-eye"  ></i></button>
                                     <input type="submit"  class="btn btn-primary fa-save" value="Save"/>
                                 </div>
                             </div>
