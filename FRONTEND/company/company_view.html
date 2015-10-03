@@ -2,14 +2,11 @@
     <h1>
         Company
     </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Company</li>
-    </ol>
 </section>
 <!-- Main content -->
 <section class="content">
     <div class="row">
+        <!--Left Box-->
         <div class="col-md-3">
 
             <div class="box box-primary">
@@ -19,7 +16,7 @@
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
             <!-- Contact Box -->
-            <div class="box box-primary">
+            <div class="box box-primary" ng-show="company_phones.length > 0">
                 <div class="box-header with-border">
                     <h3 class="box-title">Phone List</h3>
                 </div><!-- /.box-header -->
@@ -32,7 +29,7 @@
                     </div>
                 </div>
             </div><!-- /.box -->
-            <div class="box box-primary">
+            <div class="box box-primary" ng-show="company_emails.length > 0">
                 <div class="box-header with-border">
                     <h3 class="box-title">E-Mail List</h3>
                 </div><!-- /.box-header -->
@@ -44,56 +41,99 @@
                         </p>   
                     </div>
                 </div>
-            </div><!-- /.box -->
-        </div>
-        <div class="col-md-9">
-            <div class="box">
-                <form  name="frm_Company" ng-submit="SaveCompany(frm_Company)"  novalidate class="form-horizontal">
-                    <!-- Horizontal Form -->
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">General</h3>
-                            <div class="box-tools">
-                                <div class="input-group" style="width: 0px;">                                 
-                                    <button type="button"  data-dismiss="modal" class="btn btn-danger"><i class="fa fa-mail-reply"></i></button>
-                                    <input type="button" class="btn btn-primary fa-pencil" ng-click="EditCompany(selected_company.ID)" value="Edit" />
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /.box-header -->
-                    <div class='box-body'>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <th style="width:20%">Branch :</th>
-                                        <td>{{selected_company.BRANCH}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Industry :</th>
-                                        <td>{{selected_company.INDUSTRY}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Web Site :</th>
-                                        <td>{{selected_company.WEBSITE}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Address EN :</th>
-                                        <td>{{selected_company.ADDRESS_EN}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Address TH :</th>
-                                        <td>{{selected_company.ADDRESS_TH}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Description :</th>
-                                        <td>{{selected_company.DESCRIPTION}}</td>
-                                    </tr>
-                                </tbody></table>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
+        <!--End Left Box-->
+        <!--Left Box-->
+        <div class="col-md-9">
+            <!--Company Info-->
+            <div class="box">
+                <!-- Horizontal Form -->
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">General</h3>
+                        <div class="box-tools">
+                            <div class="input-group" style="width: 0px;">                                 
+                                <button type="button" ng-click='ShowAllCompany()'  data-dismiss="modal" class="btn btn-danger"><i class="fa fa-mail-reply"></i></button>
+                                <input type="button" class="btn btn-warning fa-pencil" ng-click="EditCompany(selected_company.ID)" value="Edit" />
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class='box-body'>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th style="width:20%">Name :</th>
+                                    <td>{{selected_company.NAME}}</td>
+                                </tr>
+                                <tr>
+                                    <th style="width:20%">Branch :</th>
+                                    <td>{{selected_company.BRANCH}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Industry :</th>
+                                    <td>{{selected_company.INDUSTRY}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Web Site :</th>
+                                    <td>{{selected_company.WEBSITE}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address EN :</th>
+                                    <td>{{selected_company.ADDRESS_EN}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address TH :</th>
+                                    <td>{{selected_company.ADDRESS_TH}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Description :</th>
+                                    <td>{{selected_company.DESCRIPTION}}</td>
+                                </tr>
+                            </tbody></table>
+                    </div>
+                </div>
+            </div>
+            <!--Contact List-->
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Contact</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body no-padding" ng-init="GetCompanyContactsList(selected_company.NAME)">
+                    <table class="table table-striped" id="company_contact">
+                        <tr>
+                            <th>Name</th>
+                            <th>Job Title</th>
+                            <th>Phone</th>
+                            <th>E-Mail</th>
+                        </tr>
+                        <tr ng-repeat="contact in company_contact_list">
+                            <td>{{contact.TITLE}} {{contact.FIRST_NAME}} {{contact.LAST_NAME}}</td>
+                            <td>{{contact.JOB_TITLE}}</td>
+                            <td ng-init="GetContactPhoneList(contact)">
+
+                                <div ng-repeat="phone in company_contact_phone_list[company_contact_list.indexOf(contact)]">
+                                    <span class="text-light-blue">{{phone.DESCRIPTION}}</span> : 
+                                    <span>{{phone.PHONE_NO}}</span>>
+
+                                </div>
+                            </td>
+                            <td ng-init="GetContactEmailList(contact)">
+                                <div ng-repeat="mail in company_contact_email_list[company_contact_list.indexOf(contact)]">
+                                    <span class="text-light-blue">{{mail.DESCRIPTION}}</span> : 
+                                    <span>{{mail.EMAIL}}</span>
+
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div><!-- /.box-body -->
+                <!--End Left Box Contact List-->
+            </div>
+        </div>
+        <!--End Left Box-->
     </div>
 </section>

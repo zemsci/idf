@@ -1,0 +1,211 @@
+<section class="content-header">
+    <h1>
+        Contact
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content" >
+    <div class="row">
+        <div class="col-md-3">
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-rounded" src="{{contact_company.LOGO_URL}}" alt="Company Logo">
+                    <p class="text-center">{{contact_company.NAME}}</p>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+            <!-- Contact Box -->
+            <div class="box box-primary" ng-show="company_phones.length>0">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Office Phone List</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div ng-repeat="com_phone in company_phones">
+                        <strong><i class="fa fa-phone margin-r-5"></i>  {{com_phone.DESCRIPTION}}</strong>
+                        <p class="text-muted">
+                            {{com_phone.PHONE_NO}}
+                        </p>   
+                    </div>
+                </div>
+            </div><!-- /.box -->
+            <div class="box box-primary" ng-show="company_emails.length>0">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Office E-Mail List</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div ng-repeat="com_email in company_emails">
+                        <strong><i class="fa fa-envelope margin-r-5"></i>  {{com_email.DESCRIPTION}}</strong>
+                        <p class="text-muted">
+                            {{com_email.EMAIL}}
+                        </p>   
+                    </div>
+                </div>
+            </div><!-- /.box -->
+            <div class="box box-primary" ng-show="contact_phones.length>0">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Personal Phone List</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div ng-repeat="con_phone in contact_phones">
+                        <strong><i class="fa fa-phone margin-r-5"></i>  {{con_phone.DESCRIPTION}}</strong>
+                        <p class="text-muted">
+                            {{con_phone.PHONE_NO}}
+                        </p>   
+                    </div>
+                </div>
+            </div><!-- /.box -->
+            <div class="box box-primary" ng-show="contact_emails.length>0">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Personal E-Mail List</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div ng-repeat="con_email in contact_emails">
+                        <strong><i class="fa fa-envelope margin-r-5"></i>  {{con_email.DESCRIPTION}}</strong>
+                        <p class="text-muted">
+                            {{con_email.EMAIL}}
+                        </p>   
+                    </div>
+                </div>
+            </div><!-- /.box -->
+        </div>
+        <div class="col-md-9">
+            <div class="box">
+                <form  name="frm_Contact" ng-submit="SaveContact(frm_Contact)"  novalidate class="form-horizontal">
+                    <!-- Horizontal Form -->
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">General</h3>
+                            <div class="box-tools">
+                                <div class="input-group" style="width: 0px;">                                 
+                                    <button type="button"  ng-click="ShowAllContact()" class="btn btn-danger"><i class="fa fa-reply"  ></i></button>
+                                    <input type="submit" class="btn btn-primary fa-save" value="Save"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="form-group" ng-class="{
+                                    'has-error'
+                                            :frm_Contact.$submitted &&( frm_Contact.FIRST_NAME.$error.required || frm_Contact.TITLE.$error.required)}">
+                            <label for="contact_FIRST_NAME"  class="col-sm-2 control-label">Contact Name : </label>
+                            <div class="col-sm-2">
+                                <!--<input required name="TITLE" ng-model="new_contact.TITLE" type="text" class="form-control form-control input-sm" id="contact_TITLE" placeholder="Enter Contact Title">-->
+                                <select  required id="contact_TITLE" required name="TITLE" ng-model="new_contact.TITLE" style="width: 100%;">
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <input name="FIRST_NAME" required ng-model="new_contact.FIRST_NAME" type="text" class="form-control form-control input-sm" id="contact_FIRST_NAME" placeholder="Enter Contact First Name">
+                            </div>
+                            <div class="col-sm-3">
+                                <input name="LAST_NAME" ng-model="new_contact.LAST_NAME" type="text" class="form-control form-control input-sm" id="contact_LAST_NAME" placeholder="Enter Contact Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{
+                                    'has-error'
+                                            :frm_Contact.$submitted && frm_Contact.COMPANY.$error.required }">
+                            <label for="contact_COMPANY" class="col-sm-2 control-label">Company : </label>
+                            <div class="col-sm-8">
+                                <select required ng-model="new_contact.COMPANY"  id="contact_COMPANY"  name="COMPANY" class="form-control" data-placeholder="Select company" style="width: 100%;">  
+                                    <option value="{{new_contact.COMPANY}}" selected="selected">{{new_contact.COMPANY}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{
+                             'has-error'
+                             :frm_Contact.$submitted && frm_Contact.JOB_TITLE.$error.required }">
+                            <label for="contact_JOB_TITLE" class="col-sm-2 control-label">Job Title : </label>
+                            <div class="col-sm-8">
+                                <select ng-model="new_contact.JOB_TITLE"  id="contact_JOB_TITLE" required name="JOB_TITLE" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select Job Title" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{
+                                     'has-error'
+                                            :frm_Contact.$submitted && frm_Contact.DEPARTMENT.$error.required }">
+                            <label for="contact_DEPARTMENT" class="col-sm-2 control-label">Department : </label>
+                            <div class="col-sm-8">
+                                <select ng-model="new_contact.DEPARTMENT"  id="contact_DEPARTMENT" required name="DEPARTMENT" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select Department" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_ADDRESS_EN" class="col-sm-2 control-label">Address EN : </label>
+                            <div class="col-sm-8">
+                                <textarea  ng-model="new_contact.ADDRESS_EN" id="contact_ADDRESS_EN" class="form-control" rows="3" placeholder="Enter Address EN"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_ADDRESS_TH" class="col-sm-2 control-label">Address TH : </label>
+                            <div class="col-sm-8">
+                                <textarea  ng-model="new_contact.ADDRESS_TH" id="contact_ADDRESS_TH" class="form-control" rows="3" placeholder="Enter Address TH"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_DESCRIPTION" class="col-sm-2 control-label">Description : </label>
+                            <div class="col-sm-8">
+                                <textarea id="contact_DESCRIPTION" ng-model="new_contact.DESCRIPTION" class="form-control" rows="4" placeholder="Enter Description"></textarea>
+                            </div>
+                        </div>    
+
+                    </div><!-- /.box-body -->
+                </form>
+            </div>
+            <div class="box">
+                <!-- Horizontal Form -->
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Phone</h3>
+                        <div class="box-tools">
+                            <div class="input-group" style="width: 0px;">                                 
+                                <input ng-click="AddContactPhone()" type="button" class="btn btn-primary fa-save" value="Add" />
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body" ng-show="contact_phones.length > 0">                     
+                    <div class="form-group" ng-repeat="con_phone in contact_phones">
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control form-control input-sm" id="inputEmail3" placeholder="Phone Description" ng-model="con_phone.DESCRIPTION" >
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control form-control input-sm" id="inputEmail3" placeholder="Phone No." ng-model="con_phone.PHONE_NO"  >                               
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control form-control input-sm" id="inputEmail3" placeholder="Phone EXT" ng-model="con_phone.EXT"  >                               
+                        </div>
+                        <div class="clo-sm-2">
+                            <button type='button' class="btn btn-danger fa" ng-click="DeleteContactPhone(con_phone)"><i class="fa fa-close"></i></button>
+                        </div>
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+            <div class="box">
+                <!-- Horizontal Form -->
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">E-Mail Address</h3>
+                        <div class="box-tools">
+                            <div class="input-group" style="width: 0px;">                                 
+                                <input ng-click="AddContactEmail()" type="button" class="btn btn-primary fa-save" value="Add" />
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body" ng-show="contact_emails.length > 0">                     
+                    <div class="form-group" ng-repeat="con_email in contact_emails">                   
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control form-control input-sm" id="inputEmail3" placeholder="Email Description" ng-model="con_email.DESCRIPTION" >
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control form-control input-sm" id="inputEmail3" placeholder="Email Address" ng-model="con_email.EMAIL"  >                               
+                        </div>
+                        <div class="clo-sm-2">
+                            <button class="btn btn-danger fa" ng-click="DeleteContactEmail(con_email)"><i class="fa fa-close"></i></button>
+                        </div>
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+        </div>
+    </div>
+</section>
