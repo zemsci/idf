@@ -26,7 +26,9 @@
         <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
         <!--Select2-->
         <link href="plugins/select2/select2.min.css" rel="stylesheet" type="text/css"/>
-               <!-- Theme style -->
+        <!--ngAnimate-->
+        <link href="lib/ngAnimate-master/css/ng-animation.css" rel="stylesheet" type="text/css"/>
+        <!-- Theme style -->
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
@@ -37,13 +39,14 @@
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+
     </head>
-    <body class="hold-transition skin-green sidebar-mini fixed"  ng-app="IDF_CRM" ng-controller="LEFT_MENU">
+    <body class="hold-transition skin-green sidebar-mini sidebar-collapse"  ng-app="IDF_CRM" ng-controller="MAIN">
         <div class="wrapper">
 
             <header class="main-header">
                 <!-- Logo -->
-                <a href="index2.html" class="logo">
+                <a href="#" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>IDF</b></span>
                     <!-- logo for regular state and mobile devices -->
@@ -58,20 +61,20 @@
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                             <!-- Messages: style can be found in dropdown.less-->
-                            <li class="dropdown messages-menu"  ng-include='"share/message.html"' >                                
-                            </li>
+<!--                            <li class="dropdown messages-menu"  ng-include='"share/message.html"' >                                
+                            </li>-->
                             <!-- Notifications: style can be found in dropdown.less -->
-                            <li class="dropdown notifications-menu" ng-include='"share/notifications.html"' >                             
-                            </li>
+<!--                            <li class="dropdown notifications-menu" ng-include='"share/notifications.html"' >                             
+                            </li>-->
                             <!-- Tasks: style can be found in dropdown.less -->
-                            <li class="dropdown tasks-menu"  ng-include='"share/task.html"' >    
-                            </li>
+<!--                            <li class="dropdown tasks-menu"  ng-include='"share/task.html"' >    
+                            </li>-->
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu"  ng-include='"share/userinfo.html"' >                                
                             </li>
-                            <li>
+<!--                            <li>
                                 <a href="#"><i class="fa fa-gears"></i></a>
-                            </li>
+                            </li>-->
                         </ul>
                     </div>
                 </nav>
@@ -86,17 +89,14 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper" >
-                <div id='main_container'>                  
-                </div>
-                <div ng-show="true" ng-include="Dialog">                
-                </div>
-                <div  id="modal-company" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div ng-view class="toggle" ></div>
+                <div  id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             </div>
-                            <div class="modal-body" ng-include="ModalURL">
+                            <div id="modal_container" class="modal-body">
 
                             </div>
                             <div class="modal-footer">
@@ -121,7 +121,7 @@
         <script src="plugins/jQueryUI/jquery-ui.min.js" type="text/javascript"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
-                $.widget.bridge('uibutton', $.ui.button);
+                            $.widget.bridge('uibutton', $.ui.button);
         </script>
         <!-- Bootstrap 3.3.5 -->
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -152,6 +152,8 @@
         <link href="plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
         <script src="plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+        <!--Ajax File Upload-->
+        <script src="plugins/ajax_fileupload/jquery.ajaxfileupload.js" type="text/javascript"></script>
         <!-- AdminLTE App -->
         <script src="dist/js/app.min.js"></script>
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -161,14 +163,26 @@
         <!--Bootbox-->
         <script src="plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
         <!-- Angular -->
-        <script src="lib/angular.min.js" type="text/javascript"></script>
+        <script src="lib/angular-1.4.7/angular.min.js" type="text/javascript"></script>
+        <!--ngRoute-->
+        <script src="lib/angular-1.4.7/angular-route.min.js" type="text/javascript"></script>
+        <!--ngAnimate-->
+        <script src="lib/angular-1.4.7/angular-animate.min.js" type="text/javascript"></script>
         <!--Select2-Angular-->
         <script src="plugins/angular-select2/src/select2.js" type="text/javascript"></script>
         <!--Angular <Mask-->
         <script src="plugins/angular-mask/ngMask.js" type="text/javascript"></script>
+        <!--Angular File Upload-->
+        <script src="plugins/angular-file-upload-master/dist/angular-file-upload.min.js" type="text/javascript"></script>
+        <!--ngCookies-->
+        <script src="lib/angular-1.4.7/angular-cookies.min.js" type="text/javascript"></script>
         <!-- Main JS -->
         <script src="main_js.js" type="text/javascript"></script>
-        <script src="company/App.js" type="text/javascript"></script>
-        <script src="contact/App.js" type="text/javascript"></script>
+        <script src="company/company_App.js" type="text/javascript"></script>
+        <script src="contact/contact_App.js" type="text/javascript"></script>
+        <script src="import/import_company_app.js" type="text/javascript"></script>
+        <script src="import/import_contact_app.js" type="text/javascript"></script>
+        <script src="user/user_app.js" type="text/javascript"></script>
+        <script src="project/project_app.js" type="text/javascript"></script>
     </body>
 </html>

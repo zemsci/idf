@@ -1,28 +1,38 @@
 <!-- sidebar menu: : style can be found in sidebar.less -->
+<div class="user-panel">
+    <div class="pull-left image">
+        <img ng-show='currentUser.PHOTO == null || currentUser.PHOTO == ""' class="img-circle" src="images/user.png" alt="User Logo">
+        <img ng-show='currentUser.PHOTO != null && currentUser.PHOTO != ""' class="img-circle" src="{{currentUser.PHOTO}}" alt="User Logo">
+    </div>
+    <div class="pull-left info">
+        <p>{{currentUser.TITLE}} {{currentUser.FIRST_NAME}} {{currentUser.LAST_NAME}}</p>
+        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+    </div>
+</div>
 <ul class="sidebar-menu">
     <li class="header">MAIN MENU</li>
     <li class="treeview">
-        <a href="#">
+        <a>
             <i class="fa fa-building"></i>
             <span>Company</span> 
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li class="active"><a href="#" ng-click="ShowAllCompany()"><i class="fa fa fa-circle-o"></i>All Company</a></li>
-            <li><a href="#" ng-click="ReCom()"><i class="fa fa-circle-o"></i>My Create Company</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i>My Responsibility Company</a></li>
+            <li><a href="#ShowCompany"><i class="fa fa fa-circle-o"></i>All Company</a></li>
+            <li><a href="#ShowCompany/{{currentUser.USERNAME}}" ng-click="ReCom()"><i class="fa fa-circle-o"></i>My Create Company</a></li>
+            <!--<li><a href="index2.html"><i class="fa fa-circle-o"></i>My Responsibility Company</a></li>-->
         </ul>
     </li>
     <li class="treeview">
-        <a href="#">
-            <i class="fa fa-user"></i>
+        <a>
+            <i class="fa fa-users"></i>
             <span>Contact</span> 
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li class="active"><a href="#" ng-click="ShowAllContact()"><i class="fa fa fa-circle-o"></i>All Contact</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i>My Create Contact</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i>My Responsibility Contact</a></li>
+            <li ><a href="#ShowContact"><i class="fa fa fa-circle-o"></i>All Contact</a></li>
+            <li><a href="#ShowContact/{{currentUser.USERNAME}}"><i class="fa fa-circle-o"></i>My Modify Contact</a></li>
+            <!--<li><a href="index2.html"><i class="fa fa-circle-o"></i>My Responsibility Contact</a></li>-->
         </ul>
     </li>
     <li class="treeview">
@@ -32,10 +42,31 @@
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa fa-circle-o"></i>All Project</a></li>
+            <li ><a href="#ShowProject"><i class="fa fa fa-circle-o"></i>All Project</a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i>Pending Project</a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i>Release Project</a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i>Closed Project</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-user"></i>
+            <span>User</span> 
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li ><a href="#ShowUser"><i class="fa fa fa-circle-o"></i>Manage User</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-arrow-circle-down"></i>
+            <span>Import</span> 
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li ><a href="#" ng-click="ImportCompanyPage()"><i class="fa fa fa-circle-o"></i>Import Company</a></li>
+            <li ><a href="#" ng-click="ImportContactPage()"><i class="fa fa fa-circle-o"></i>Import Contact</a></li>
         </ul>
     </li>
 </ul>

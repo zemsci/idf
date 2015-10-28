@@ -33,14 +33,38 @@ class Record extends CI_Controller {
                 $data[$Req] = $_REQUEST[$Req];
             }
         }
-
-        $this->db->where($CheckField, $data[$CheckField]);
+        $CheckField_arr = explode(",", $CheckField);
+        foreach ($CheckField_arr as $CheckField) {
+            $this->db->where($CheckField, $data[$CheckField]);
+        }
         if ($this->db->count_all_results($Table) == 0) {
             $this->db->insert($Table, $data);
         } else {
-            $this->db->where($CheckField, $data[$CheckField]);
+            foreach ($CheckField_arr as $CheckField) {
+                $this->db->where($CheckField, $data[$CheckField]);
+            }
             $this->db->update($Table, $data);
         }
+        echo "OK";
+    }
+
+    public function update($Table, $CheckField) {
+        $_REQUEST = json_decode(file_get_contents('php://input'), true);
+        $Fields = $this->db->list_fields($Table);
+        $data = array();
+        foreach (array_keys($_REQUEST) as $Req) {
+
+            if (in_array($Req, $Fields)) {
+                $data[$Req] = $_REQUEST[$Req];
+            }
+        }
+        if (isset($_REQUEST["filter"]) && $_REQUEST["filter"] != "") {
+            $filter = $_REQUEST["filter"];
+            foreach ($filter as $value) {
+                $this->db->where($value['field'], $value['value']);
+            }
+        }
+        $this->db->update($Table, $data);
         echo "OK";
     }
 
@@ -60,17 +84,25 @@ class Record extends CI_Controller {
         if (isset($_REQUEST['search'])) {
             $datatable_search = $_REQUEST['search'];
         }
+        if (isset($_REQUEST["filter"]) && $_REQUEST["filter"] != "") {
+            $filter = $_REQUEST["filter"];
+        }
         if (file_get_contents('php://input') != "") {
             $_REQUEST = json_decode(file_get_contents('php://input'), true);
         } else {
             unset($_REQUEST);
         }
+
+        if (isset($_REQUEST["filter"]) && $_REQUEST["filter"] != "") {
+            $filter = $_REQUEST["filter"];
+        }
         $count_all = $this->db->count_all_results($table);
 
         $this->db->start_cache();
-        if (isset($_REQUEST["filter"]) && $_REQUEST["filter"] != "") {
-            $filter = $_REQUEST["filter"];
+        if (isset($filter)) {
+
             foreach ($filter as $value) {
+
                 $this->db->where($value['field'], $value['value']);
             }
         }
@@ -84,11 +116,17 @@ class Record extends CI_Controller {
         }
 
         if (isset($datatable_search)) {
+
+            $this->db->group_start();
+
             for ($i = 0; $i < count($datatable_columns); $i++) {
+
                 if ($datatable_columns[$i]["searchable"] == "true") {
                     $this->db->or_like($datatable_columns[$i]["data"], $datatable_search["value"]);
                 }
             }
+
+            $this->db->group_end();
         }
 
 

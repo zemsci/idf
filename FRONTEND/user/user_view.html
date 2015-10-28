@@ -1,0 +1,76 @@
+<section class="content-header">
+    <h1>
+        User
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <form  name="frm_User" 
+           ng-submit="CheckUsername(frm_User)"  
+           novalidate class="form-horizontal"
+           >
+        <div class="row">
+            <div class="col-md-3">
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        <img ng-show='user.PHOTO != null && user.PHOTO != ""' class="profile-user-img img-responsive img-circle" src="{{user.PHOTO}}" alt="User Logo">
+                        <img ng-show='user.PHOTO == null || user.PHOTO == ""' class="profile-user-img img-responsive img-circle" src="images/user.png" alt="User Logo">
+
+                        <p class="text-center">{{user.TITLE}} {{user.FIRST_NAME}} {{user.LAST_NAME}}</p>
+                    </div><!-- /.box-body -->
+                    <div class="overlay" id="processing" ng-show="loading">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div><!-- /.box -->
+            </div>
+            <div class="col-md-9"> 
+                <div class="box">
+                    <!-- Horizontal Form -->
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">General</h3>
+                            <div class="box-tools">
+                                <div class="input-group" style="width: 0px;">                                 
+                                    <button type="button"  ng-click="back()" class="btn btn-info"><i class="fa fa-reply"  ></i></button>                                   
+                                    <a href="#EditUser/{{user.ID}}" class="btn btn-warning"><i class='fa fa-pencil margin-r-5'></i>Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th style="width:20%">Name :</th>
+                                        <td>{{user.TITLE}} {{user.FIRST_NAME}} {{user.LAST_NAME}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:20%">Position :</th>
+                                        <td>{{user.POSITION}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:20%">Username :</th>
+                                        <td>{{user.USERNAME}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:20%">Mobile :</th>
+                                        <td>{{user.MOBILE}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:20%">E-Mail :</th>
+                                        <td>{{user.EMAIL}}</td>
+                                    </tr>
+                                </tbody></table>
+                        </div>
+                    </div><!-- /.box-body -->
+                    <div class="overlay" id="processing" ng-show="loading">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</section>
+

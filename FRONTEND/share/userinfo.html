@@ -1,18 +1,27 @@
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-    <span class="hidden-xs">Alexander Pierce</span>
+<a class="dropdown-toggle" data-toggle="dropdown">
+    <img ng-show='currentUser.PHOTO == null || currentUser.PHOTO == ""' class="user-image" src="images/user.png" alt="User Logo">
+    <img ng-show='currentUser.PHOTO != null && currentUser.PHOTO != ""' class="user-image" src="{{currentUser.PHOTO}}" alt="User Logo">
+
+    <span class="hidden-xs">{{currentUser.TITLE}} {{currentUser.FIRST_NAME}} {{currentUser.LAST_NAME}}}</span>
 </a>
 <ul class="dropdown-menu">
+    <li class="user-header">
+        <img src="{{currentUser.PHOTO}}" class="img-circle" alt="User Image">
+        <p>
+            {{currentUser.TITLE}} {{currentUser.FIRST_NAME}} {{currentUser.LAST_NAME}}
+            <small>{{CurrentUser.POSITION}}</small>
+        </p>
+    </li>
     <!-- Menu Body -->
     <li class="user-body">
         <div class="col-xs-4 text-center">
-            <a href="#">Change Password</a>
+            <a href="#/ChangeUserPassword/{{currentUser.ID}}">Change Password</a>
         </div>
         <div class="col-xs-4 text-center">
-            <a href="#">Profile</a>
+            <a href="#/EditPfofile/{{currentUser.ID}}">Profile</a>
         </div>
         <div class="col-xs-4 text-center">
-            <a href="#">Lotout</a>
+            <a href="#/login">Logout</a>
         </div>
     </li>
 </ul>

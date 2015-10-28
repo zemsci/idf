@@ -1,0 +1,67 @@
+<div id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!--            <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Log In</h4>
+                        </div>-->
+            <div class="modal-body">
+                <div class="login-box">
+
+                    <div class="login-logo">
+                        <b>IDF-Asian</b>
+                    </div><!-- /.login-logo -->
+                    <div class="login-box-body" ng-show="!loading">
+
+                        <form  ng-submit="login()">
+
+                            <div ng-show="error" class="alert alert-danger alert-dismissable">
+
+                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                <p>{{message}}<p>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <input ng-model="username" required="" type="text" class="form-control" placeholder="Username">
+                                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <input ng-model="password" required="" type="password" class="form-control" placeholder="Password">
+                                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-8">
+
+                                </div><!-- /.col -->
+                                <div class="col-xs-4">
+                                    <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+                                </div><!-- /.col -->
+                            </div>
+
+                        </form>
+
+                    </div><!-- /.login-box-body -->
+
+                </div>
+                <div class="box box-danger" ng-show="loading">
+                    <div class="box-header">
+                        <h3 class="box-title">Loading state</h3>
+                    </div>
+                    <div class="box-body">
+                        Logging in to system
+                    </div><!-- /.box-body -->
+                    <!-- Loading (remove the following to stop the loading)-->
+                    <div class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                    <!-- end loading -->
+                </div>
+            </div>
+            <!--            <div class="modal-footer">
+                        </div>-->
+        </div>
+
+    </div>
+</div>

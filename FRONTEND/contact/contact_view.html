@@ -1,0 +1,190 @@
+<section class="content-header">
+    <h1>
+        Contact
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <!--Left Box-->
+        <div class="col-md-3">
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <img ng-show='contact_company.LOGO_URL != null' class="profile-user-img img-responsive img-rounded" src="{{contact_company.LOGO_URL}}" alt="Company Logo">
+                    <img ng-show='contact_company.LOGO_URL == null' class="profile-user-img img-responsive img-rounded" src="images/company.jpg" alt="Company Logo">
+
+                    <p class="text-center"><a href='#ViewCompany/{{contact_company.ID}}'>{{contact_company.NAME}}</a></p>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+            <!-- Contact Box -->
+            <div class="box box-primary"  ng-show="contact_company.PHONE1 != '' || contact_company.PHONE2 != ''">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Office Phone</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div>
+                        <strong ng-show="contact_company.PHONE1 != ''" > <i class ="fa fa-phone margin-r-5"></i>  {{contact_company.PHONE1}}</strong>
+                    </div>
+                    <div>
+                        <strong ng-show="contact_company.PHONE2 != ''" > <i class ="fa fa-phone margin-r-5"></i>  {{contact_company.PHONE1}}</strong>
+                    </div>
+                </div>
+            </div><!-- /.box -->
+            <!-- Contact Box -->
+            <div class="box box-primary"  ng-show="contact_company.FAX1 != '' || contact_company.FAX2 != ''">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Office FAX</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div>
+                        <strong ng-show="contact_company.FAX1 != ''" > <i class ="fa fa-fax margin-r-5"></i>  {{contact_company.FAX1}}</strong>
+                    </div>
+                    <div>
+                        <strong ng-show="contact_company.FAX2 != ''" > <i class ="fa fa-fax margin-r-5"></i>  {{contact_company.FAX2}}</strong>
+                    </div>
+                </div>
+            </div><!-- /.box -->
+            <div class="box box-primary" ng-show="contact_company.EMAIL1 != '' || contact_company.EMAIL2 != ''">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Office E-Mail</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div>
+                        <strong ng-show="contact_company.EMAIL1 != ''" > <i class ="fa fa-envelope margin-r-5"></i>  {{contact_company.EMAIL1}}</strong>
+                    </div>
+                    <div>
+                        <strong ng-show="contact_company.EMAIL2 != ''" > <i class ="fa fa-envelope margin-r-5"></i>  {{contact_company.EMAIL2}}</strong>
+                    </div>
+                </div>
+            </div><!-- /.box -->
+
+            <div class="box box-primary"  ng-show="contact.DIRECTPHONE1 != '' || contact.DIRECTPHONE2 != ''">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Direct Phone</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div>
+                        <strong ng-show="contact.DIRECTPHONE1 != ''" > <i class ="fa fa-phone margin-r-5"></i>  {{contact.DIRECTPHONE1}}</strong>
+                    </div>
+                    <div>
+                        <strong ng-show="contact.DIRECTPHONE2 != ''" > <i class ="fa fa-phone margin-r-5"></i>  {{contact.DIRECTPHONE2}}</strong>
+                    </div>
+                </div>
+            </div><!-- /.box -->
+            <div class="box box-primary" ng-show="contact.MOBILE1 != '' || contact.MOBILE2 != ''">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Mobile</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div>
+                        <strong ng-show="contact.MOBILE1 != ''" > <i class ="fa fa-mobile margin-r-5"></i>  {{contact.MOBILE1}}</strong>
+                    </div>
+                    <div>
+                        <strong ng-show="contact.MOBILE2 != ''" > <i class ="fa fa-mobile margin-r-5"></i>  {{contact.MOBILE2}}</strong>
+                    </div>
+                </div>
+            </div><!-- /.box -->
+            <div class="box box-primary" ng-show="contact.EMAIL1 != '' || contact.EMAIL2 != ''">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Personal E-Mail</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div>
+                        <strong ng-show="contact.EMAIL1 != ''" > <i class ="fa fa-envelope margin-r-5"></i>  {{contact.EMAIL1}}</strong>
+                    </div>
+                    <div>
+                        <strong ng-show="contact.EMAIL2 != ''" > <i class ="fa fa-envelope margin-r-5"></i>  {{contact.EMAIL2}}</strong>
+                    </div>
+                </div>
+            </div><!-- /.box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Create Detail</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div>
+                        <strong> <i class ="fa fa-user margin-r-5"></i>Create By :  {{contact.CREATE_BY}}</strong>
+                    </div>
+                    <div>
+                        <strong> <i class ="fa fa-calendar margin-r-5"></i>Create Date :  {{contact.CREATE_DATE}}</strong>
+                    </div>
+                    <div>
+                        <strong> <i class ="fa fa-clock-o margin-r-5"></i>Create Time :  {{contact.CREATE_TIME}}</strong>
+                    </div>
+                </div>
+            </div><!-- /.box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Modify Detail</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div>
+                        <strong> <i class ="fa fa-user margin-r-5"></i>Modify By :  {{contact.MODIFY_BY}}</strong>
+                    </div>
+                    <div>
+                        <strong> <i class ="fa fa-calendar margin-r-5"></i>Modify Date :  {{contact.MODIFY_DATE}}</strong>
+                    </div>
+                    <div>
+                        <strong> <i class ="fa fa-clock-o margin-r-5"></i>Modify Time :  {{contact.MODIFY_TIME}}</strong>
+                    </div>
+                </div>
+            </div><!-- /.box -->
+        </div>
+        <!--End Left Box-->
+        <!--Left Box-->
+        <div class="col-md-9">
+            <!--Company Info-->
+            <div class="box">
+                <!-- Horizontal Form -->
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">General</h3>
+                        <div class="box-tools">
+                            <div class="input-group" style="width: 0px;">                                 
+                                <button type="button" ng-click='back()'  class="btn btn-info"><i class="fa fa-mail-reply"></i></button>
+                                <a href="#EditContact/{{contact.ID}}" class="btn btn-warning"><i class='fa fa-pencil margin-r-5'></i>Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class='box-body'>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th style="width:20%">Name :</th>
+                                    <td>{{contact.TITLE}} {{contact.FIRST_NAME}} {{contact.LAST_NAME}}</td>
+                                </tr>
+                                <tr>
+                                    <th style="width:20%">Job Title :</th>
+                                    <td>{{contact.JOB_TITLE}}</td>
+                                </tr>
+                                <tr>
+                                    <th style="width:20%">COMPANY :</th>
+                                    <td><a href='#ViewCompany/{{contact_company.ID}}'>{{contact.COMPANY}}</a></td>
+                                </tr>
+                                <tr>
+                                    <th>Department :</th>
+                                    <td>{{contact.DEPARTMENT}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address EN :</th>
+                                    <td>{{contact.ADDRESS_EN}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Address TH :</th>
+                                    <td>{{contact.ADDRESS_TH}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Description :</th>
+                                    <td>{{contact.DESCRIPTION}}</td>
+                                </tr>
+                            </tbody></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Left Box-->
+    </div>
+</section>

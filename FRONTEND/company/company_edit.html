@@ -5,54 +5,115 @@
 </section>
 <!-- Main content -->
 <section class="content">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="box box-primary">
-                <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-rounded" src="{{new_company.LOGO_URL}}" alt="Company Logo">
-                    <p class="text-center">{{new_company.NAME}}</p>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
+    <form  name="frm_Company" 
+           ng-submit="SaveCompany(frm_Company)"  
+           novalidate class="form-horizontal"
+           >
+        <div class="row">
+            <div class="col-md-3">
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                         <img ng-show='company.LOGO_URL !=null' class="profile-user-img img-responsive img-rounded" src="{{contact_company.LOGO_URL}}" alt="Company Logo">
+                         <img ng-show='company.LOGO_URL ==null' class="profile-user-img img-responsive img-rounded" src="images/company.jpg" alt="Company Logo">
+                    
+                        <p class="text-center">{{company.NAME}}</p>
+                    </div><!-- /.box-body -->
+                    <div class="overlay" id="processing" ng-show="loading">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div><!-- /.box -->
 
-            <!-- Contact Box -->
-            <div class="box box-primary"  ng-show="company_phones.length > 0">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Phone List</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                    <div ng-repeat="com_phone in company_phones">
-                        <strong><i class="fa fa-phone margin-r-5"></i>  {{com_phone.DESCRIPTION}}</strong>
-                        <p class="text-muted">
-                            {{com_phone.PHONE_NO}}
-                        </p>   
+                <!-- Contact Box -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Phone</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-phone"></i>
+                            </span>
+                            <input type="text" 
+                                   ng-model="company.PHONE1" 
+                                   class="form-control" 
+                                   placeholder="Phone No."
+                                   >
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-phone"></i>
+                            </span>
+                            <input type="text" 
+                                   ng-model="company.PHONE2" 
+                                   class="form-control" 
+                                   placeholder="Phone No."
+                                   >
+                        </div>
                     </div>
-                </div>
-            </div><!-- /.box -->
-            <div class="box box-primary"  ng-show="company_emails.length > 0">
-                <div class="box-header with-border">
-                    <h3 class="box-title">E-Mail List</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                    <div ng-repeat="com_email in company_emails">
-                        <strong><i class="fa fa-envelope margin-r-5"></i>  {{com_email.DESCRIPTION}}</strong>
-                        <p class="text-muted">
-                            {{com_email.EMAIL}}
-                        </p>   
+                    <div class="overlay" id="processing" ng-show="loading">
+                        <i class="fa fa-refresh fa-spin"></i>
                     </div>
-                </div>
-            </div><!-- /.box -->
-        </div>
-        <div class="col-md-9">
-            <div class="box">
-                <form  name="frm_Company" ng-submit="SaveCompany(frm_Company)"  novalidate class="form-horizontal">
+                </div><!-- /.box -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">FAX</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-fax"></i>
+                            </span>
+                            <input type="text" 
+                                   ng-model="company.FAX1" 
+                                   class="form-control" 
+                                   placeholder="FAX No."
+                                   >
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-fax"></i></span>
+                            <input type="text" ng-model="company.FAX2" class="form-control" placeholder="FAX No.">
+                        </div>
+                    </div>
+                    <div class="overlay" id="processing" ng-show="loading">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div><!-- /.box -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">E-Mail</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="input-group" ng-class="{
+                                    'has-error'
+                                            :frm_Company.$submitted && frm_Company.EMAIL1.$error.email }">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            <input type="email" name="EMAIL1" ng-model="company.EMAIL1" class="form-control" placeholder="E-Mail">
+                        </div>
+                        <br>
+                        <div class="input-group" ng-class="{
+                                    'has-error'
+                                            :frm_Company.$submitted && frm_Company.EMAIL2.$error.email }">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            <input type="email" name="EMAIL2" ng-model="company.EMAIL2" class="form-control" placeholder="E-Mail">
+                        </div>
+                    </div>
+                    <div class="overlay" id="processing" ng-show="loading">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div><!-- /.box -->
+            </div>
+            <div class="col-md-9">
+                <div class="box">
+
                     <!-- Horizontal Form -->
                     <div class="box">
                         <div class="box-header">
                             <h3 class="box-title">General</h3>
                             <div class="box-tools">
                                 <div class="input-group" style="width: 0px;">                                 
-                                    <button type="button"  ng-click="ShowAllCompany()" class="btn btn-danger"><i class="fa fa-reply"  ></i></button>
-                                    <button  ng-show="Mode=='EDIT'" type="button"  ng-click="ShowCompanyInfo(new_company.ID)" class="btn btn-info">View</button>
+                                    <button type="button"  ng-click="back()" class="btn btn-info"><i class="fa fa-reply"  ></i></button>                                   
                                     <input type="submit"  class="btn btn-primary fa-save" value="Save"/>
                                 </div>
                             </div>
@@ -64,117 +125,75 @@
                                             :frm_Company.$submitted && frm_Company.NAME.$error.required }">
                             <label for="company_NAME"  class="col-sm-4 control-label">Company Name : </label>
                             <div class="col-sm-8">
-                                <input name="NAME" required ng-model="new_company.NAME" type="text" class="form-control form-control input-sm" id="company_NAME" placeholder="Enter Company Name">
+                                <input name="NAME" required ng-model="company.NAME" type="text" class="form-control form-control input-sm" id="company_NAME" placeholder="Enter Company Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="company_GROUP" class="col-sm-4 control-label">Group of company : </label>
+                            <div class="col-sm-8">
+                                <input name="GROUP_OF_COMPANY" ng-model="company.GROUP_OF_COMPANY" type="text" class="form-control form-control input-sm" id="company_GROUP" placeholder="Enter group of company">
+                                <!--                                <select ng-model="company.GROUP_OF_COMPANY"  id="company_GROUP" name="GROUP_OF_COMPANY" class="form-control" data-placeholder="Select company" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                                </select>-->
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="company_BRANCH" class="col-sm-4 control-label">Branch : </label>
                             <div class="col-sm-8">
-                                <input ng-model="new_company.BRANCH" type="text" class="form-control form-control input-sm" id="company_BRANCH" placeholder="Enter branch of company">
+                                <input ng-model="company.BRANCH" type="text" class="form-control form-control input-sm" id="company_BRANCH" placeholder="Enter branch of company">
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{
+                        <div  class="form-group" ng-class="{
                                     'has-error'
                                             :frm_Company.$submitted &&  frm_Company.INDUSTRY.$error.required }">
                             <label for="company_INDUSTRY" class="col-sm-4 control-label">Industry : </label>
                             <div class="col-sm-8">
-                                <!--<input required name="INDUSTRY" ng-model="new_company.INDUSTRY" type="text" class="form-control form-control input-sm" id="company_INDUSTRY" placeholder="Enter Industry">-->
-                                <select ng-model="new_company.INDUSTRY"  id="company_INDUSTRY" required name="INDUSTRY" class="form-control" multiple="" data-placeholder="Select Industry" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                <!--<input required name="INDUSTRY" ng-model="company.INDUSTRY" type="text" class="form-control form-control input-sm" id="company_INDUSTRY" placeholder="Enter Industry">-->
+                                <select ng-model="company.INDUSTRY"  id="company_INDUSTRY" required name="INDUSTRY" class="form-control" multiple="" data-placeholder="Select Industry" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="company_WEBSITE" class="col-sm-4 control-label">Web site : </label>
                             <div class="col-sm-8">
-                                <input ng-model="new_company.WEB_SITE" type="text" class="form-control form-control input-sm" id="company_WEBSITE" placeholder="Enter Web site">
+                                <input ng-model="company.WEB_SITE" type="text" class="form-control form-control input-sm" id="company_WEBSITE" placeholder="Enter Web site">
 
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="company_ADDRESS_EN" class="col-sm-4 control-label">Address EN : </label>
                             <div class="col-sm-8">
-                                <textarea  ng-model="new_company.ADDRESS_EN" id="company_ADDRESS_EN" class="form-control" rows="3" placeholder="Enter Address EN"></textarea>
+                                <textarea  ng-model="company.ADDRESS_EN" id="company_ADDRESS_EN" class="form-control" rows="3" placeholder="Enter Address EN"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="company_ADDRESS_TH" class="col-sm-4 control-label">Address TH : </label>
                             <div class="col-sm-8">
-                                <textarea  ng-model="new_company.ADDRESS_TH" id="company_ADDRESS_TH" class="form-control" rows="3" placeholder="Enter Address TH"></textarea>
+                                <textarea  ng-model="company.ADDRESS_TH" id="company_ADDRESS_TH" class="form-control" rows="3" placeholder="Enter Address TH"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="company_DESCRIPTION" class="col-sm-4 control-label">Description : </label>
                             <div class="col-sm-8">
-                                <textarea id="company_DESCRIPTION" ng-model="new_company.DESCRIPTION" class="form-control" rows="4" placeholder="Enter Description"></textarea>
+                                <textarea id="company_DESCRIPTION" ng-model="company.DESCRIPTION" class="form-control" rows="4" placeholder="Enter Description"></textarea>
                             </div>
                         </div>    
                         <div class="form-group">
                             <label for="company_DESCRIPTION" class="col-sm-4 control-label">Company Logo : </label>
                             <div class="col-sm-8">
-                                <input id="company_DESCRIPTION" ng-model="new_company.LOGO_URL" class="form-control" rows="4" placeholder="Enter Company Logo">
+                                <input id="company_DESCRIPTION" ng-model="company.LOGO_URL" class="form-control" rows="4" placeholder="Enter Company Logo">
                             </div>
                         </div>  
 
                     </div><!-- /.box-body -->
-                </form>
+                    <div class="overlay" id="processing" ng-show="loading">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div>
+
             </div>
-            <div class="box">
-                <!-- Horizontal Form -->
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Phone</h3>
-                        <div class="box-tools">
-                            <div class="input-group" style="width: 0px;">                                 
-                                <input ng-click="AddCompanyPhone()" type="button" class="btn btn-primary fa-save" value="Add" />
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /.box-header -->
-                <div class="box-body" ng-show="company_phones.length > 0">                     
-                    <div class="form-group" ng-repeat="com_phone in company_phones">
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control input-sm" id="inputEmail3" placeholder="Phone Description" ng-model="com_phone.DESCRIPTION" >
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control input-sm" id="inputEmail3" placeholder="Phone No." ng-model="com_phone.PHONE_NO"  >                               
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control form-control input-sm" id="inputEmail3" placeholder="Phone EXT" ng-model="com_phone.EXT"  >                               
-                        </div>
-                        <div class="clo-sm-2">
-                            <button type='button' class="btn btn-danger fa" ng-click="DeleteCompanyPhone(com_phone)"><i class="fa fa-close"></i></button>
-                        </div>
-                    </div>
-                </div><!-- /.box-body -->
-                </form>
-            </div><!-- /.box -->
-            <div class="box">
-                <!-- Horizontal Form -->
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">E-Mail Address</h3>
-                        <div class="box-tools">
-                            <div class="input-group" style="width: 0px;">                                 
-                                <input ng-click="AddCompanyEmail()" type="button" class="btn btn-primary fa-save" value="Add" />
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /.box-header -->
-                <div class="box-body" ng-show="company_emails.length > 0">                     
-                    <div class="form-group" ng-repeat="com_email in company_emails">                   
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control input-sm" id="inputEmail3" placeholder="Email Description" ng-model="com_email.DESCRIPTION" >
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control form-control input-sm" id="inputEmail3" placeholder="Email Address" ng-model="com_email.EMAIL"  >                               
-                        </div>
-                        <div class="clo-sm-2">
-                            <button class="btn btn-danger fa" ng-click="DeleteCompanyEmail(com_email)"><i class="fa fa-close"></i></button>
-                        </div>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
 
         </div>
-    </div>
+
+    </form>
 </section>
+
